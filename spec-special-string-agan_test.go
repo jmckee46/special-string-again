@@ -13,27 +13,28 @@ func TestSpecialStringAgain1(t *testing.T) {
 	}
 }
 
-// func TestSpecialStringAgain2(t *testing.T) {
-// 	n := int32(5)
-// 	s := "asasd"
+func TestSpecialStringAgain2(t *testing.T) {
+	n := int32(5)
+	s := "asasd"
 
-// 	possibleStrings := substrCount(n, s)
+	possibleStrings := substrCount(n, s)
 
-// 	if possibleStrings != 12 {
-// 		t.Errorf("got %d instead of 12", possibleStrings)
-// 	}
-// }
+	if possibleStrings != 7 {
+		t.Errorf("got %d instead of 7", possibleStrings)
+	}
+}
 
-// func TestSpecialStringAgain3(t *testing.T) {
-// 	n := int32(7)
-// 	s := "abcbaba"
+func TestSpecialStringAgain3(t *testing.T) {
+	n := int32(7)
+	s := "abcbaba"
 
-// 	possibleStrings := substrCount(n, s)
+	possibleStrings := substrCount(n, s)
 
-// 	if possibleStrings != 12 {
-// 		t.Errorf("got %d instead of 12", possibleStrings)
-// 	}
-// }
+	if possibleStrings != 10 {
+
+		t.Errorf("got %d instead of 10", possibleStrings)
+	}
+}
 
 func TestSpecialStringAgain4(t *testing.T) {
 	n := int32(4)
@@ -47,15 +48,29 @@ func TestSpecialStringAgain4(t *testing.T) {
 }
 
 func TestSpecialStringAgain5(t *testing.T) {
-	n := int32(13)
-	s := "aaaabaaacaaaa"
+	n := int32(11)
+	s := "aaaabaaacaa"
 
 	possibleStrings := substrCount(n, s)
 
-	if possibleStrings != -1 {
-		t.Errorf("got %d instead of -1", possibleStrings)
+	if possibleStrings != 26 {
+		t.Errorf("got %d instead of 26", possibleStrings)
 	}
 }
+
+// aaaabaaacaa
+
+// individual letters - 11
+// aaaa - 6
+// aaabaaa - 1
+// aabaa - 1
+// aba - 1
+
+// aaa - 3
+// aacaa - 1
+// aca - 1
+// aa - 1
+// 26 total
 
 // aaaaa
 

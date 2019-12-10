@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+// substrCount looks for a patterns of style aba, aabaa... or aaaa...
+// if it finds aa...abaa...a it will calculate the aa..a part first, then the aba/aabaa/aaabaaa combinations
+// and then start again on the middle/different letter to look again.
+// example aaaabaaabaa
 func substrCount(n int32, s string) int64 {
 	var combinations int64
 	var endOfFirst int32
@@ -11,33 +15,34 @@ func substrCount(n int32, s string) int64 {
 	var start int32
 	var continueFlag = true
 
-	// so far this calculates the length of one pattern, not the combinations yet!
-	// need logic to calculate same letter repeated combinations and
-	// need logic to calculate pattern combinations
-	// need to start at the right place, (current +1) on next iteration of loop
-
+	fmt.Println("adding individual letter count to combinations:", n)
+	// add the individual letter combinations
 	combinations = int64(n)
 
 	for continueFlag {
+		fmt.Printf("starting on: %c\n", s[start])
 		endOfFirst = checkForRepeater(start, s, n)
 		firstLength = endOfFirst - start + 1
+		// add the repeat combinations, which is aaaa on the first pass from the example above
 		combinations += repeatCombinations(firstLength)
-		fmt.Println("endOfFirst", endOfFirst, s[start:endOfFirst+1])
+		fmt.Println("endOfFirst", endOfFirst, s[start:endOfFirst+1], "firstLength", firstLength)
 
 		if endOfFirst == n-1 {
 			fmt.Println("break due to end of string")
 			break
 		}
-
-		if s[start] == s[endOfFirst+2] {
-			fmt.Println("s[start] == s[endOfFirst+2]", s[start], s[endOfFirst+2])
+		// if a pattern of aba is detected
+		if endOfFirst+2 < n && s[start] == s[endOfFirst+2] {
+			fmt.Printf("s[start] == s[endOfFirst+2], %c = %c\n", s[start], s[endOfFirst+2])
 			endOfLast = checkForRepeater(endOfFirst+2, s, n)
-			lastLength = endOfLast - endOfFirst + 3
+			lastLength = endOfLast - endOfFirst - 1
+			fmt.Println("endOfLast", endOfLast, s[endOfFirst:endOfLast], "lastLength", lastLength)
 			if firstLength < lastLength {
-				fmt.Println("adding to combinations for patterns:", firstLength)
+				fmt.Println("adding firstLength combinations for patterns:", firstLength)
+				fmt.Println("combinations = ", combinations)
 				combinations += int64(firstLength)
 			} else {
-				fmt.Println("adding to combinations for patterns:", lastLength)
+				fmt.Println("adding lastLength combinations for patterns:", lastLength)
 				combinations += int64(lastLength)
 			}
 		} else {
@@ -47,8 +52,9 @@ func substrCount(n int32, s string) int64 {
 
 		start = endOfFirst + 1
 		fmt.Println("start = ", endOfFirst+1)
+		fmt.Println("combinations = ", combinations)
 		fmt.Println("")
-		if start >= n-2 {
+		if start >= n-1 {
 			continueFlag = false
 		}
 	}
@@ -63,7 +69,7 @@ func checkForRepeater(start int32, s string, sLength int32) int32 {
 	fmt.Println(start, s, sLength)
 
 	for i := int32(start); i < sLength; i++ {
-		fmt.Println("for loop:", s[i], i)
+		fmt.Printf("for loop: %c, %d\n", s[i], i)
 		if s[start] != s[i] {
 			return i - 1
 		}

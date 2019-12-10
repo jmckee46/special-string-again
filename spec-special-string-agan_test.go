@@ -57,35 +57,3 @@ func TestSpecialStringAgain5(t *testing.T) {
 		t.Errorf("got %d instead of 26", possibleStrings)
 	}
 }
-
-// aaaabaaacaa
-
-// individual letters - 11
-// aaaa - 6
-// aaabaaa - 1
-// aabaa - 1
-// aba - 1
-
-// aaa - 3
-// aacaa - 1
-// aca - 1
-// aa - 1
-// 26 total
-
-// aaaaa
-
-// aa - 4
-// aaa - 3
-// aaaa - 2
-// aaaaa - 1
-
-// aaaa
-
-// aa - 3
-// aaa - 2
-// aaaa - 1
-
-// aaa
-
-// aa - 2
-// aaa - 1
